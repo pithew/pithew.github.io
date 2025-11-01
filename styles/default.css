@@ -10,6 +10,7 @@ main {
   background:#8c8c8c;
   border:;
   padding: 2px;
+  border-bottom: 1px soild #000
 }
 footer {
   background:#2e2e2e;
