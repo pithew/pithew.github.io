@@ -1,23 +1,16 @@
 body {
-  font:;
+  font-size: 18px;
 }
 header{
   background:#ccc;
-  padding-bottom: 2px;
-  margin: 0;
-  display: flex;
-  position: absolute;
-  border-top: 3px soild navy;
-  border-bottom: 1px soild #eee;
+  margin-bottom: 2px;
 }
 main {
   background:#8c8c8c;
-  border:;
   padding: 2px;
-  border-bottom: 1px soild #000
 }
 footer {
   background:#2e2e2e;
-  color:;
+  color: #ccc;
   padding: 2px;
 }
