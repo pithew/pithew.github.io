@@ -1,0 +1,15 @@
+body {
+  font:;
+}
+header{
+  background:#ccc;
+  padding: 2px;
+}
+main {
+  border:;
+  padding: 2px;
+}
+footer {
+  color:;
+  padding: 2px;
+}
