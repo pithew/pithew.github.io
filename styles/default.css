@@ -6,10 +6,12 @@ header{
   padding: 2px;
 }
 main {
+  background:#8c8c8c;
   border:;
   padding: 2px;
 }
 footer {
+  background:#2e2e2e;
   color:;
   padding: 2px;
 }
