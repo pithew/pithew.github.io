@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -5,19 +6,60 @@
     <title>Pithew's work</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;900&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/default.css">
   </head>
   <dody>
-    <header>
-      <h1>Pithew's work.</h1>
-      <a href="">Home</a>
-      <a href="">Links</a>
+    <header class="hero-section">
+      <nav class="main-nav">
+        <div class="logo">PITHEW</div>
+        <div class="menu-toggle">[hamberg icon]</div>
+      </nav>
+      <div class="hero-content">
+        <h1>代码构成的山地车</h1>
+        <p>融合工程的严谨与艺术的自由</p>
+      </div>
     </header>
-    <main>
-      <h1>Hi, there!</h1>
+    <main class="container">
+      <section class="module-section">
+        <h2>工程技术</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="card-image-preview">[项目截图/代码预览图]</div>
+            <div class="card-content">
+              <h3>嵌入式控制系统</h3>
+              <p>基于 STM32 的高精度电机控制器。</p>
+              <div class="tech-badges">
+                <span class="badge">STM32</span>
+                <span class="badge">C++</span>
+                <span class="badge">RTOS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="module-section">
+        <h2>艺术生活</h2>
+        <div class="art-masonry">
+          <div class="art-item">
+            <img src="path/to/high-res-image.jpg" alt="艺术作品描述">
+              <div class="art-info-overlay">
+                <h3>作品标题</h3>
+                <p>数字绘画 / 2025</p>
+              </div>
+            </div>
+          </div>
+        </section>
     </main>
-    <footer>
-      Copyleft(ɔ)2077
+    <footer class="site-footer">
+      <p>&copy; 2025 Pithew. 保留所有权利。</p>
+        <div class="social-icons">
+          <a href="#">[GitHub]</a>
+          <a href="#">[Bilibili]</a>
+          <a href="#">[ArtStation]</a>
+        </div>
     </footer>
     <script src="scripts/main.js"></script>
   </dody>
