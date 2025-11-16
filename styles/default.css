@@ -1,16 +1,283 @@
+/* :root 定义规范中的所有颜色、字体和渐变，以便全局复用 */
+:root {
+    /* II.1. 配色方案 (Dark Mode) */
+    --color-bg-main: #121212;
+    --color-text-main: #F0F0F0;
+    --color-accent-a-neon: #00FFFF; /* 强调色 A (电光青) */
+    --color-neutral-soft: #6A6A6A;  /* 中性色 (柔和暖灰) */
+
+    /* 强调色 B (l风格渐变) - 用于TOC、光晕、点缀 */
+    --gradient-accent-b: linear-gradient(90deg, #9400D3, #007FFF, #00FF00); /* 紫-蓝-绿 */
+
+    /* II.2. 字体排版系统 */
+    --font-family-body: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-family-heading: 'Montserrat', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-family-code: 'Fira Code', 'PingFang SC', 'Microsoft YaHei', monospace;
+
+    --line-height-body: 1.7; /* 规范要求 1.6x-1.7x */
+}
+
+/* 全局基础样式，重置了默认行为，设置正文、标题字体和背景色 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-  font-size: 18px;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    font-family: var(--font-family-body);
+    line-height: var(--line-height-body);
+    font-size: 16px; /* 设定基础字号 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-header{
-  background:#ccc;
-  margin-bottom: 2px;
+
+/* 标题字体应用 */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: 700; /* 大胆、层次清晰 */
+    line-height: 1.2;
+    margin-bottom: 1rem;
 }
-main {
-  background:#8c8c8c;
-  padding: 2px;
+
+/* 链接样式 - 默认使用柔和中性色 */
+a {
+    color: var(--color-neutral-soft);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
-footer {
-  background:#2e2e2e;
-  color: #ccc;
-  padding: 2px;
+
+/* 交互元素（如链接、按钮）悬停时使用强调色 A */
+a:hover,
+button:hover {
+    color: var(--color-accent-a-neon);
+    text-shadow: 0 0 5px var(--color-accent-a-neon); /* 模拟霓虹光晕 */
+}
+
+/* 页面主要容器，增加两侧留白 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/*  首页模块 CSS (Styling) */
+
+/* III. Hero 模块 */
+.hero-section {
+    min-height: 100vh; /* 全屏沉浸式 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    /* 规范：核心视觉是“代码山地车”，需要一个背景图或 3D 渲染 */
+    /* background-image: url('/path/to/hero-visual.jpg'); */
+    background-size: cover;
+    background-position: center;
+}
+.hero-section h1 {
+    font-size: 4rem; /* 大号标题 */
+    font-weight: 900;
+    color: var(--color-accent-a-neon);
+    text-shadow: 0 0 10px var(--color-accent-a-neon);
+}
+.main-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+}
+
+/* III. 工程技术 (三列响应式网格) */
+.projects-grid {
+    display: grid;
+    /* 方案B：三列响应式网格 */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+.project-card {
+    background: #1A1A1A; /* 比主背景稍亮 */
+    border: 1px solid var(--color-neutral-soft);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px); /* 微弱浮动 */
+    box-shadow: 0 0 15px var(--color-accent-a-neon); /* 霓虹光晕 */
+}
+.card-image-preview {
+    height: 180px;
+    background: #333; /* 占位符 */
+    display: grid;
+    place-items: center;
+    color: var(--color-neutral-soft);
+}
+.card-content {
+    padding: 1.5rem;
+}
+.tech-badges {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+/* 霓虹小徽章 */
+.badge {
+    background-color: var(--color-accent-a-neon);
+    color: var(--color-bg-main); /* 高对比度反色 */
+    font-family: var(--font-family-code);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* III. 艺术生活 (不规则砌体式网格) */
+/* 使用 CSS Columns 实现简单的 Masonry 效果 */
+.art-masonry {
+    column-count: 3; /* 桌面端3列 */
+    column-gap: 1rem;
+    margin-top: 2rem;
+}
+.art-item {
+    position: relative;
+    margin-bottom: 1rem;
+    break-inside: avoid; /* 防止卡片在列中断开 */
+    overflow: hidden;
+    border-radius: 4px;
+}
+.art-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+/* 悬停遮罩与文字（关键交互） */
+.art-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 18, 18, 0.8); /* 半透明遮罩 */
+    color: var(--color-text-main);
+    padding: 1.5rem;
+    
+    /* 默认隐藏 */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* 文字沉底 */
+}
+.art-item:hover .art-info-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+.art-info-overlay h3 {
+    color: var(--color-accent-a-neon); /* 霓虹文字 */
+}
+
+/* III. 页脚 */
+.site-footer {
+    border-top: 1px solid var(--color-neutral-soft);
+    margin-top: 4rem;
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-neutral-soft);
+}
+.social-icons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+/* 页脚社交图标使用霓虹色 */
+.social-icons a {
+    color: var(--color-accent-a-neon);
+    font-size: 1.5rem;
+}
+.social-icons a:hover {
+    text-shadow: 0 0 10px var(--color-accent-a-neon);
+}
+
+/* 内页规范 (代码块 & TOC) */
+
+/* IV. TOC 导航 (侧边固定) */
+.toc-navigation {
+    position: sticky;
+    top: 2rem; /* 距离顶部固定 */
+    max-height: 90vh;
+    overflow-y: auto;
+    padding-left: 1rem;
+}
+
+.toc-navigation a {
+    display: block;
+    padding: 0.5rem;
+    border-left: 3px solid var(--color-neutral-soft);
+    color: var(--color-neutral-soft);
+    transition: all 0.3s ease;
+}
+
+/* TOC 当前阅读标题高亮 (强调色 B 渐变) */
+.toc-navigation a.is-active {
+    color: var(--color-text-main);
+    font-weight: 700;
+    /* 关键：使用渐变色作为边框 */
+    border-image: var(--gradient-accent-b) 1;
+}
+
+/* IV. 代码块 (Fira Code 连字) */
+pre {
+    background-color: #0A0A0A; /* 比主背景更深，或使用 #121212 */
+    border: 1px solid var(--color-neutral-soft);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto; /* 代码过长时滚动 */
+    margin: 2rem 0;
+}
+
+code {
+    font-family: var(--font-family-code);
+    /* 开启连字 (Ligatures)，例如 '==' 变为 '==' */
+    font-feature-settings: "liga" 1, "calt" 1;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* IV. 代码块语法高亮 (规范示例) */
+/* 需要使用 Prism.js 或 highlight.js 来获得这些类名 */
+
+/* 关键字 (使用强调色 A) */
+.token.keyword,
+.token.function {
+    color: var(--color-accent-a-neon);
+}
+
+/* 注释 (使用柔和 L色彩，例如从渐变中取紫色) */
+.token.comment {
+    color: #C390D4; /* 柔和的紫色 */
+    font-style: italic;
+}
+
+/* 字符串 */
+.token.string {
+    color: #6AFFF5; /* 另一种青色 */
+}
+
+/* 变量 */
+.token.property,
+.token.variable {
+    color: #F0F0F0; /* 主文字色 */
 }
