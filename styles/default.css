@@ -144,51 +144,107 @@ button:hover {
 /* III. 艺术生活 (不规则砌体式网格) */
 /* 使用 CSS Columns 实现简单的 Masonry 效果 */
 .art-masonry {
-    column-count: 3; /* 桌面端3列 */
-    column-gap: 1rem;
     margin-top: 2rem;
+    
+    /* 规范：不规则砌体式 (Masonry) 网格 */
+    /* 我们使用 CSS Columns (纯CSS方案) 来实现 */
+    column-gap: 1rem;
+    
+    /* 响应式布局：
+       - 移动端 1 列
+       - 平板 2 列
+       - 桌面 3 列
+    */
+    column-count: 1; 
 }
+@media (min-width: 600px) {
+    .art-masonry {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 900px) {
+    .art-masonry {
+        column-count: 3;
+    }
+}
+
+/* 艺术卡片容器 */
 .art-item {
-    position: relative;
-    margin-bottom: 1rem;
-    break-inside: avoid; /* 防止卡片在列中断开 */
-    overflow: hidden;
+    position: relative; /* 用于 .art-info-overlay 的绝对定位 */
+    margin-bottom: 1rem; /* 卡片之间的垂直间距 */
+    
+    /* 关键：防止卡片在列与列之间被截断 */
+    break-inside: avoid; 
+    
+    overflow: hidden; /* 确保遮罩层不会溢出圆角 */
     border-radius: 4px;
+    border: 1px solid var(--color-neutral-soft);
+    
+    /* 悬停光晕 (符合赛博风格) */
+    transition: box-shadow 0.3s ease;
 }
+.art-item:hover {
+    box-shadow: 0 0 15px var(--color-accent-a-neon);
+}
+
+/* 规范：视觉优先 (图片占满卡片) */
 .art-item img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: auto; /* 关键：允许图片自适应高度，形成不规则感 */
+    display: block; /* 移除图片底部的额外空间 */
 }
-/* 悬停遮罩与文字（关键交互） */
+
+/* 规范：悬停遮罩 */
 .art-info-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(18, 18, 18, 0.8); /* 半透明遮罩 */
-    color: var(--color-text-main);
-    padding: 1.5rem;
+
+    /* 规范：半透明遮罩 
+       (我们使用从底部渐变的遮罩，比纯色更精致) */
+    background: linear-gradient(to top, 
+        rgba(18, 18, 18, 0.95) 20%,  /* 底部 #121212 95% 不透明 */
+        rgba(18, 18, 18, 0.0) 100% /* 顶部完全透明 */
+    );
     
-    /* 默认隐藏 */
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    
+    /* 将文字内容推到底部 */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* 文字沉底 */
+    justify-content: flex-end;
+    
+    padding: 1.5rem;
+    color: var(--color-text-main);
+
+    /* 规范：文字信息默认隐藏 */
+    opacity: 0;
+    transform: translateY(10px); /* 增加轻微的向上滑动效果 */
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+/* 规范：悬停时浮现 */
 .art-item:hover .art-info-overlay {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* 规范：霓虹文字 */
 .art-info-overlay h3 {
-    color: var(--color-accent-a-neon); /* 霓虹文字 */
+    color: var(--color-accent-a-neon);
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 0 5px var(--color-accent-a-neon);
+}
+.art-info-overlay p {
+    color: var(--color-text-main);
+    font-size: 0.9rem;
+    margin-bottom: 0; /* 覆盖 p 的全局 margin */
 }
 
 /* III. 页脚 */
+
 .site-footer {
     border-top: 1px solid var(--color-neutral-soft);
     margin-top: 4rem;
