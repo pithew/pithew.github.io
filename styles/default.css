@@ -281,3 +281,156 @@ code {
 .token.variable {
     color: #F0F0F0; /* 主文字色 */
 }
+
+
+/* ---------------------------------- */
+/* 汉堡包菜单功能 (步骤三) */
+/* ---------------------------------- */
+
+/* 1. 汉堡包按钮 (.menu-toggle) */
+.menu-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    z-index: 1001; /* 确保它在所有内容之上 */
+    position: relative; /* 确保 z-index 生效 */
+}
+
+.hamburger-box {
+    width: 30px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+}
+
+.hamburger-inner {
+    display: block;
+    top: 50%;
+    margin-top: -1px; /* (2px / 2) */
+}
+
+/* 汉堡包图标的三条线 */
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    width: 30px;
+    height: 2px;
+    background-color: var(--color-text-main); /* 霓虹色或白色 */
+    border-radius: 4px;
+    position: absolute;
+    /* 动画过渡 */
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                background-color 0.3s ease;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+    content: '';
+    display: block;
+}
+
+.hamburger-inner::before {
+    top: -10px;
+}
+
+.hamburger-inner::after {
+    bottom: -10px; /* = top: 10px */
+}
+
+
+/* 2. 激活状态："X" 动画 */
+/* 当 .menu-toggle.is-active 时... */
+
+.menu-toggle.is-active .hamburger-inner {
+    /* 中间的线：旋转 45 度 */
+    transform: rotate(45deg);
+    background-color: var(--color-accent-a-neon); /* 激活时变为霓虹色 */
+}
+
+.menu-toggle.is-active .hamburger-inner::before {
+    /* 上面的线：移动到中间，旋转 -45 度 (总共 90 度) */
+    top: 0;
+    transform: rotate(-45deg); /* 实际是 rotate(0) + rotate(-45) */
+    background-color: var(--color-accent-a-neon);
+}
+
+.menu-toggle.is-active .hamburger-inner::after {
+    /* 下面的线：移动到中间，隐藏 */
+    /* 我们将它与中间的线合并（旋转45度），所以我们让它透明 */
+    bottom: 0;
+    transform: rotate(45deg); /* 与中间的线重叠 */
+    opacity: 0; /* 隐藏它，只留下 2 条线构成 "X" */
+}
+
+
+/* 3. 全屏菜单层 (.nav-menu-overlay) */
+.nav-menu-overlay {
+    position: fixed; /* 全屏覆盖 */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* 赛博风格背景：使用深色 + 模糊效果 (如果浏览器支持) */
+    background-color: rgba(18, 18, 18, 0.9); /* #121212 的 90% 透明度 */
+    backdrop-filter: blur(10px);
+    
+    /* 居中菜单项 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* 默认隐藏 */
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1); /* 轻微放大，用于缩放动画 */
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+    
+    z-index: 1000; /* 在按钮之下，但在页面其他内容之上 */
+}
+
+/* 4. 菜单激活状态 (由 JS 切换) */
+.nav-menu-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.nav-menu-overlay ul {
+    list-style: none;
+    text-align: center;
+}
+
+.nav-menu-overlay li {
+    margin: 1rem 0;
+    /* 激活时，菜单项淡入 */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* 激活时，菜单项依次出现 (Stagger animation) */
+.nav-menu-overlay.is-active li {
+    opacity: 1;
+    transform: translateY(0);
+}
+.nav-menu-overlay.is-active li:nth-child(1) { transition-delay: 0.2s; }
+.nav-menu-overlay.is-active li:nth-child(2) { transition-delay: 0.3s; }
+.nav-menu-overlay.is-active li:nth-child(3) { transition-delay: 0.4s; }
+/* (如有需要可继续添加...) */
+
+
+/* 菜单链接样式 (符合规范) */
+.nav-menu-overlay a {
+    font-family: var(--font-family-heading); /* 标题字体 */
+    font-size: 2.5rem; /* 大号字体 */
+    font-weight: 700;
+    color: var(--color-text-main);
+    padding: 1rem;
+    display: inline-block;
+}
+.nav-menu-overlay a:hover {
+    color: var(--color-accent-a-neon);
+    text-shadow: 0 0 10px var(--color-accent-a-neon);
+}
