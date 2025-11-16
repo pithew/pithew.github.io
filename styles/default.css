@@ -304,7 +304,7 @@ pre {
     margin: 2rem 0;
 }
 
-code {
+pre > code { /* 确保这里使用 Prism 的结构 */
     font-family: var(--font-family-code);
     /* 开启连字 (Ligatures)，例如 '==' 变为 '==' */
     font-feature-settings: "liga" 1, "calt" 1;
@@ -313,23 +313,31 @@ code {
 }
 
 /* IV. 代码块语法高亮 (规范示例) */
-/* 需要使用 Prism.js 或 highlight.js 来获得这些类名 */
-
-/* 关键字 (使用强调色 A) */
+/* 使用 Prism.js 来获得这些类名 */
+/* 语法高亮覆盖：应用 Pithew 赛博+L颜色 */
+/* 关键字、函数 (使用强调色 A: 霓虹蓝) */
 .token.keyword,
-.token.function {
-    color: var(--color-accent-a-neon);
+.token.function,
+.token.selector {
+    color: var(--color-accent-a-neon) !important; /* 使用 !important 确保覆盖 Prism 默认样式 */
+}
+
+/* 字符串、URL */
+.token.string,
+.token.url {
+    color: #6AFFF5 !important; /* 一种冷色的赛博青色 */
 }
 
 /* 注释 (使用柔和 L色彩，例如从渐变中取紫色) */
 .token.comment {
-    color: #C390D4; /* 柔和的紫色 */
+    color: #C390D4 !important; /* 柔和的淡紫色 */
     font-style: italic;
 }
 
-/* 字符串 */
-.token.string {
-    color: #6AFFF5; /* 另一种青色 */
+/* 数字、布尔值 */
+.token.number,
+.token.boolean {
+    color: #FF57FF !important; /* 霓虹粉 */
 }
 
 /* 变量 */
