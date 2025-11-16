@@ -434,3 +434,130 @@ code {
     color: var(--color-accent-a-neon);
     text-shadow: 0 0 10px var(--color-accent-a-neon);
 }
+
+
+/* ---------------------------------- */
+/* IV. 文章详情页布局 (步骤二) */
+/* ---------------------------------- */
+
+/* 文章页的紧凑型 Hero */
+.hero-section-compact {
+    min-height: auto; /* 不再是 100vh */
+    padding-bottom: 2rem;
+    background: var(--color-bg-main); /* 纯色背景 */
+}
+.hero-section-compact .hero-content {
+    display: none; /* 隐藏首页的 "代码山地车" 标题 */
+}
+
+/* 文章页双栏布局 (内容 + 侧边栏) */
+.article-layout {
+    display: grid;
+    grid-template-columns: 1fr; /* 移动端默认单列 */
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+/* 桌面端 (例如 1024px 以上) */
+@media (min-width: 1024px) {
+    .article-layout {
+        /* 侧边栏 250px，内容 1fr (自动)，间距 3rem */
+        grid-template-columns: 1fr 250px;
+    }
+    
+    /* 在桌面端，TOC 在右侧，内容在左侧 */
+    .article-content {
+        grid-column: 1 / 2;
+    }
+    .toc-sidebar {
+        grid-column: 2 / 3;
+        grid-row: 1; /* 确保它在第一行 */
+    }
+}
+
+/* 文章主体内容 */
+.article-content {
+    /* 极简沉浸式阅读 (两侧留白多) */
+    /* 在 .container 的基础上，我们不需要额外留白 */
+    max-width: 800px; /* 限制最大阅读宽度，提高可读性 */
+    width: 100%;
+}
+.article-content h1 {
+    font-size: 3rem;
+    color: var(--color-accent-a-neon); /* 标题使用霓虹色 */
+}
+.article-content .meta {
+    color: var(--color-neutral-soft);
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+.article-content p, 
+.article-content li {
+    margin-bottom: 1.5rem;
+}
+.article-content h2 {
+    font-size: 2rem;
+    margin-top: 3rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-neutral-soft);
+}
+.article-content h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    color: var(--color-accent-a-neon);
+}
+
+
+/* TOC 侧边栏 (已定义) */
+.toc-sidebar {
+    width: 100%;
+}
+.toc-navigation {
+    position: sticky; /* 关键：侧边固定浮动 */
+    top: 2rem; /* 距离顶部的偏移量 */
+    max-height: calc(100vh - 4rem); /* 防止TOC过长 */
+    overflow-y: auto;
+    padding-left: 1rem;
+    font-size: 0.9rem;
+}
+.toc-navigation strong {
+    font-family: var(--font-family-heading);
+    color: var(--color-text-main);
+    display: block;
+    margin-bottom: 1rem;
+}
+.toc-navigation ul {
+    list-style: none;
+}
+.toc-navigation ul ul {
+    padding-left: 1rem; /* 嵌套列表缩进 */
+    margin-top: 0.5rem;
+}
+
+/* TOC 链接的默认样式 (已定义) */
+.toc-navigation a {
+    display: block;
+    padding: 0.5rem 0.5rem;
+    border-left: 2px solid var(--color-neutral-soft);
+    color: var(--color-neutral-soft);
+    transition: all 0.3s ease;
+}
+.toc-navigation a:hover {
+    color: var(--color-accent-a-neon);
+    border-left-color: var(--color-accent-a-neon);
+}
+
+/* * IV. TOC 高亮 (关键样式) 
+ * (已定义，这里是复习)
+ */
+.toc-navigation a.is-active {
+    color: var(--color-text-main);
+    font-weight: 700;
+    
+    /* 规范要求：使用强调色 B (渐变色) 高亮 */
+    border-left-width: 3px;
+    border-image: var(--gradient-accent-b) 1;
+    
+    /* 渐变光晕效果 */
+    text-shadow: 0 0 8px #9400D3; /* 匹配渐变的紫色 */
+}
