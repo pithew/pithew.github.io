@@ -15,10 +15,21 @@
     <header class="hero-section">
       <nav class="main-nav">
         <div class="logo">PITHEW</div>
-        <div class="menu-toggle">[hamberg icon]</div>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
       </nav>
+      <div class="nav-menu-overlay">
+        <ul>
+          <li><a href="#projects">工程技术</a></li>
+          <li><a href="#art">艺术生活</a></li>
+          <li><a href="#about">关于</a></li>
+        </ul>
+      </div>
       <div class="hero-content">
-        <h1>代码构成的山地车</h1>
+        <h1>MTB with Code</h1>
         <p>融合工程的严谨与艺术的自由</p>
       </div>
     </header>
@@ -61,6 +72,7 @@
           <a href="#">[ArtStation]</a>
         </div>
     </footer>
+    <script src="app.js" defer></script>
     <script src="scripts/main.js"></script>
   </dody>
 </html>
